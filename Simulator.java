@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Simulator {
 	
-//	Object Creation for class HashMaps and class FLAGS
+//	Object Creation is done for class HashMaps and class FLAGS
 	public static HashMaps hp = new HashMaps();
 	public static Flags fl = new Flags();
 	
@@ -15,16 +15,16 @@ public class Simulator {
 	public static int PC = 0;
 	
 //	Creating a list of all the Program Counters encountered
-//	To be used in Write.java
+//	To be used  in Write.java
 	public static ArrayList<Integer> PCList = new ArrayList<Integer>(256);
 	
-//	Creating Memory as a List to Store all the instructions provided in the test cases
+//	Creating the Memory as a List to Store all the instructions provided in the test cases
 	public static ArrayList<String> MemList = new ArrayList<String>(256);
 	
 	public static void Initialize() {
-		// Initializing memory with "0000000000000000"
+		// Initializing the memory with "0000000000000000"
 		for (int i = 0; i < 256; i++) {
-			MemList.add("0000000000000000");
+			 MemList.add("0000000000000000");
 		}
 	}
 
@@ -44,13 +44,13 @@ public class Simulator {
 		
 //		Traverse the ArrayList/Data
 		while (true) {
-//			Make a list of program counters
+//			Making a list of program counters
 			PCList.add(PC);
 			
 //			Enter the process
 			process(MemList.get(PC));
 			
-//			Stop at hlt
+//			Stop at halt
 			String func = MemList.get(PC - 1).substring(0, 5);
 			
 			if (func.equals("10011")) {
@@ -235,7 +235,7 @@ public class Simulator {
 	}
 
 	public static void hlt() {
-		// TODO Auto-generated method stub
+		 // TODO Auto-generated method stub
 //		1. Reset flags
 		fl.reset();
 	
@@ -249,7 +249,7 @@ public class Simulator {
 	
 	public static void je(String mem_addr) {
 			// TODO Auto-generated method stub
-//		1. Change PC to mem_addr if equal is set
+//		 1. Change PC to mem_addr if equal is set
 		if (fl.ifEqual()) {
 //			2. Reset flags
 			fl.reset();
@@ -275,7 +275,7 @@ public class Simulator {
 	
 	public static void jgt(String mem_addr) {
 			// TODO Auto-generated method stub
-//		1. Change PC to mem_addr if greater than is set
+//		 1. Change PC to mem_addr if greater than is set
 		if (fl.ifGreaterThan()) {
 //			2. Reset flags
 			fl.reset();
@@ -326,15 +326,15 @@ public class Simulator {
 	
 	
 	public static void jmp(String mem_addr) {
-		// TODO Auto-generated method stub
-//		1. Reset flags
-		fl.reset();
+		 // TODO Auto-generated method stub
+//		 1. Reset flags
+		 fl.reset();
 		
 //		2. Print Call
-		print();
+		 print();
 		
 //		3. PC = mem_addr
-		PC = binInt(mem_addr);
+		 PC = binInt(mem_addr);
 	}
 	
 	
@@ -368,7 +368,7 @@ public class Simulator {
 //		1. Reset flags
 		fl.reset();
 		
-//		2.1) Take MemList value at index binInt(mem_add) 
+//		2.1) Take MemList value at the index binInt(mem_add) 
 //		2.2) store in r1
 		r1.value = MemList.get(binInt(mem_addr));
 		
@@ -407,10 +407,10 @@ public class Simulator {
 		}
 		
 //		3. Print Call
-		print();
+		 print();
 		
 //		4. PC update
-		PC++;
+		 PC++;
 		
 	}
 	
@@ -441,8 +441,8 @@ public class Simulator {
 	
 	public static void div(String reg3, String reg4) {
 		// TODO Auto-generated method stub
-//		R0 = reg3 / reg4 (quotient)
-//		R1 = reg3 % reg4 (remiander)
+//		 R0 = reg3 / reg4 (quotient)
+//		 R1 = reg3 % reg4 (remiander)
 		
 		Register r0 = HashMaps.register.get("000");
 		Register r1 = HashMaps.register.get("001");
@@ -505,7 +505,7 @@ public class Simulator {
 //		1. Reset Flags
 		fl.reset();
 		
-//		2.1) Imm and r.value ki string => bin se int mei convert
+//		2.1) Imm and r.value string => bin to int  convert
 //		2.2) use << on r.value imm ki integers
 		r.value = binStrRF(binInt(r.value) << binInt(Imm));
 //		r.value = binStrRF((int)(binInt(r.value) * Math.pow(2, binInt(Imm))));
@@ -528,7 +528,7 @@ public class Simulator {
 //		1. Reset Flags
 		fl.reset();
 		
-//		2.2) Imm and r.value ki string => bin se int mei convert
+//		2.2) Imm and r.value ki string => bin to int  convert
 //		2.3) use >>> on r.value imm ki integers
 		r.value = binStrRF(binInt(r.value) >>> binInt(Imm));
 		
@@ -571,7 +571,7 @@ public class Simulator {
 //		1. Reset Flags
 		fl.reset();
 		
-//		2. reg2 & reg3 ki string => bin se int mei convert  => integers ko bitwise and => back to binary string
+//		2. reg2 & reg3 ki string => bin to int  convert  => integers to bitwise and => back to binary string
 		r1.value = 	binStrRF(binInt(r2.value) & binInt(r3.value));
 		
 //		3. Print Call
@@ -741,7 +741,7 @@ public class Simulator {
 
 	
 //	Conversions ke Functions
-//	Convert from Binary to Integer
+//	Converting from Binary to Integer
 	public static int binInt(String val) {
 //		0001 => 0 * 2^3 + 0 * 2^2 + 0 * 2^1 + 1 * 2^0
 		int Val = Integer.parseInt(val);
@@ -808,13 +808,13 @@ public class Simulator {
 
 
 class HashMaps {
-//	HashMap for registers
+//	 HashMap for registers
 	public static HashMap<String, Register> register = new HashMap<String, Register>();
 	
-//	HashMap for opcodes and various properties
+//	 HashMap for opcodes and various properties
 	public static HashMap<String, Opcode> opcode = new HashMap<String, Opcode>();
 	
-//	Constructor
+//	 Constructor
 	public HashMaps() {
 		// TODO Auto-generated method stub
 		CreateRegisterMap();
