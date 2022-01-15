@@ -6,24 +6,24 @@ import java.util.*;
 
 public class Assembler {
 	
-//	to display line numbers with errors
+//	to display the line numbers with errors
 	public static int linenumber = 1; 
 	
-//	to find mem_add of labels
+//	to find the mem_add of labels
 	public static int mem_addLabels = 0;  // Check whether mem_add starts from 0 or 1
 	
-//	to fine mem_add of Variables
+//	to find the mem_add of Variables
 	public static int mem_addVariables = 0;
 	
-//	for variables not declared at the beginning error
+//	this is for variables not declared at the beginning error
 	public static boolean varNotStart = false; 
 	
-//	Initialization and Object Creation
+//	Initialization and Object Creation is done here
 //	Initialization of HashMap variable and HashMap labels
 	public static HashMap<String, String> variable = new HashMap<String, String>();
 	public static HashMap<String, String> labels = new HashMap<String, String>();
 	
-//	Object Creation for class HashMaps and class TypePrinting
+//	Object Creation for class HashMaps and class TypePrinting is done here.
 	public static HashMaps hp = new HashMaps();
 	public static TypePrinting tp = new TypePrinting();
 
@@ -32,7 +32,9 @@ public class Assembler {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 //		Reads The file
+		
 		try {
+			
 			boolean hltpresent = false;
 			
 //			Take input to find the test file			
@@ -75,9 +77,9 @@ public class Assembler {
 			
 //			Check if hlt is missing
 			if (!hltpresent) {
-				throw new Exception("ERROR: Missing hlt instruction");
+				throw new  Exception("ERROR: Missing hlt instruction");
 			}
-//			sc.close();     //closes the scanner  
+//			sc.close();     // closes the scanner  
 		
 		}  
 		catch(IOException e) {
@@ -158,12 +160,12 @@ public static void processVar(String line, String[] words) throws Exception {
 			throw new Exception("ERROR: Label doesn't have an instruction " + linenumber);
 		}
 		
-//		Wrong function name error
+//		Wrong function name error is thrown here
 		if (!HashMaps.opcode.containsKey(words[0])) {
 			throw new Exception("ERROR: Unrecognised function name in line " + linenumber);
 		}
 		
-//		Type Selection
+//		Type of Selection
 		if (words[0].equals("add") || words[0].equals("sub") || words[0].equals("mul") || words[0].equals("xor") || words[0].equals("or") || words[0].equals("and")) {
 //			Type A :- add, sub, mul, xor, or, and (6)
 			TypeA(line, words);
@@ -234,7 +236,7 @@ public static void processVar(String line, String[] words) throws Exception {
 		Register r2 = HashMaps.register.get(words[2]);
 		Register r3 = HashMaps.register.get(words[3]);
 		
-//		Printing
+//		Printing done
 		TypePrinting.TypeAPrint(o.opcode, r1.address, r2.address, r3.address);
 	}
 	
@@ -330,7 +332,7 @@ public static void processVar(String line, String[] words) throws Exception {
 		else {
 //			Case 2: mov R1 R2 
 //			Opcode("00000", "C", "add", 2, 0, 0)
-//			Register("R0", "000")
+//			Register("R0",  "000")
 			
 //			Wrong Syntax error
 			if (words.length != 3 || line.contains("$")) {
@@ -375,7 +377,7 @@ public static void processVar(String line, String[] words) throws Exception {
 //			ERROR
 			throw new Exception("ERROR: Misuse of label as variable " + linenumber);
 		}
-//		Check if variable used as mem_address
+//		Check if variable is used as mem_address
 		else if (variable.containsKey(words[2])) {
 //			Printing
 			TypePrinting.TypeDPrint(o.opcode, r1.address, variable.get(words[2]));
@@ -425,7 +427,7 @@ public static void processVar(String line, String[] words) throws Exception {
 //		Opcode("00000", "A", "add", 3, 0, 0)
 //		Register("R0", "000")
 		
-//		Wrong Syntax error
+//		Wrong  Syntax error
 		if (words.length != 1 || line.contains("$")) {
 			throw new Exception("ERROR: Wrong Syntax used for instructions in line " + linenumber);
 		}
@@ -758,25 +760,25 @@ class Flags {
 	}
 	
 	public void overflow() {
-//		V change karna hai
+//		V is to be changed
 //		12 is V
 		flags[12] = 1;
 	}
 	
 	public void lessThan() {
-//		L change karna hai
+//		L is to be changed
 //		13 is L
 		flags[13] = 1;
 	}
 	
 	public void greaterThan() {
-//		G change karna hai
+//		G is to be changed
 //		14 is G
 		flags[14] = 1;
 	}
 	
 	public void equal() {
-//		E change karna hai
+//		E is to be changed
 //		15 is E
 		flags[15] = 1;
 	}
